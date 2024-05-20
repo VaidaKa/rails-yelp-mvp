@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center mb-4">Create a New Restaurant</h1>
+
+      <%= simple_form_for @restaurant, html: { class: "my-5" } do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Enter restaurant name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address %>
+          <%= f.text_field :address, class: "form-control", placeholder: "Enter restaurant address" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :phone_number %>
+          <%= f.text_field :phone_number, class: "form-control", placeholder: "Enter phone number" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :category %>
+          <%= f.select :category, Restaurant::CATEGORIES, {}, class: "form-control", prompt: "Select category" %>
+        </div>
+
+        <%= f.submit "Create Restaurant", class: "btn btn-primary btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center mb-4"><%= @restaurant.name %></h1>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Details</h5>
+          <table class="table table-bordered mb-0">
+            <tbody>
+              <tr>
+                <th scope="row">Address</th>
+                <td><%= @restaurant.address %></td>
+              </tr>
+              <tr>
+                <th scope="row">Phone Number</th>
+                <td><%= @restaurant.phone_number %></td>
+              </tr>
+              <tr>
+                <th scope="row">Category</th>
+                <td><%= @restaurant.category.capitalize %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h2 class="mb-3">Reviews</h2>
+      <% @restaurant.reviews.each do |review| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <%= render_stars(review.rating) %>
+              </div>
+              <small class="text-muted"><%= review.created_at.strftime("%B %d, %Y") %></small>
+            </div>
+            <p class="mb-0"><%= review.content %></p>
+          </div>
+        </div>
+      <% end %>
+
+      <h2 class="mb-3">Add a Review</h2>
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <div class="form-group">
+          <%= f.label :rating, "Rating" %>
+          <%= f.input :rating, collection: 0..5, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :content, "Review" %>
+          <%= f.input :content, class: 'form-control' %>
+        </div>
+        <%= f.submit "Submit Review", class: 'btn btn-primary' %>
+      <% end %>
+
+      <div class="text-center mt-4">
+        <%= link_to "See All Restaurants", restaurants_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
